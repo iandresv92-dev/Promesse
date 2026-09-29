@@ -70,8 +70,15 @@
   .chip.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
   .grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 20px 20px; }
-  .product-card{ background:var(--card); border-radius:18px; border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; }
-  .swatch{ aspect-ratio:1/1; overflow:hidden; background:var(--rose-pale); }
+  .product-card{ background:var(--card); border-radius:18px; border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; position:relative; }
+  .product-card.soldout{ opacity:0.75; }
+  .product-card.soldout .swatch img{ filter:grayscale(100%); }
+  .p-badge{
+    position:absolute; top:10px; right:10px; z-index:10; background:rgba(43,29,22,0.88);
+    color:#fff; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700;
+    text-align:center; letter-spacing:0.03em;
+  }
+  .swatch{ aspect-ratio:1/1; overflow:hidden; background:var(--rose-pale); position:relative; }
   .swatch img{ width:100%; height:100%; object-fit:cover; display:block; }
   .p-info{ padding:10px 12px 12px; flex:1; display:flex; flex-direction:column; }
   .p-name{ font-weight:600; font-size:13px; line-height:1.3; font-family:'Fraunces',serif; }
@@ -82,6 +89,7 @@
     font-size:12px; font-weight:600; padding:9px; border-radius:10px; cursor:pointer;
   }
   .p-cta.added{ background:#25914e; }
+  .p-cta.disabled{ background:#A89E99; cursor:not-allowed; opacity:0.6; }
 
   .overlay{ position:fixed; inset:0; background:rgba(43,29,22,0.45); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:70; }
   .overlay.open{ opacity:1; pointer-events:auto; }
@@ -170,24 +178,27 @@
 
 <div class="grid" id="grid">
       <div class="product-card" data-cat="hombre" data-name="Pack Sin Costura Men" data-price="6990">
+        
         <div class="swatch"><img src="images/pack-01-sin-costura-men.jpg" alt="Pack Sin Costura Men" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Sin Costura Men</div>
-          <div class="p-desc">6 pares sin costura, para el día a día.</div>
+          <div class="p-desc">6 pares sin costura, para el día a día. Material: bambú.</div>
           <div class="p-price">$6.990</div>
           <button class="p-cta" onclick="addToCart('p0','Pack Sin Costura Men',6990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="hombre" data-name="Pack Juvenil Men" data-price="7990">
+        
         <div class="swatch"><img src="images/pack-02-juvenil-men.jpg" alt="Pack Juvenil Men" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Juvenil Men</div>
-          <div class="p-desc">7 pares, diseños Boston + básicos.</div>
+          <div class="p-desc">7 pares, diseños Boston + básicos. Material: algodón y bambú.</div>
           <div class="p-price">$7.990</div>
           <button class="p-cta" onclick="addToCart('p1','Pack Juvenil Men',7990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="hombre" data-name="Pack Sport Men" data-price="6490">
+        
         <div class="swatch"><img src="images/pack-03-sport-men.jpg" alt="Pack Sport Men" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Sport Men</div>
@@ -197,78 +208,87 @@
         </div>
       </div>
       <div class="product-card" data-cat="hombre" data-name="Pack Urban Vans" data-price="6490">
+        
         <div class="swatch"><img src="images/pack-04-urban-vans.jpg" alt="Pack Urban Vans" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Urban Vans</div>
-          <div class="p-desc">5 pares, estilo urbano, ajedrez + estrella.</div>
+          <div class="p-desc">5 pares, estilo urbano, ajedrez + estrella. Material: algodón.</div>
           <div class="p-price">$6.490</div>
           <button class="p-cta" onclick="addToCart('p3','Pack Urban Vans',6490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="hombre" data-name="Pack Urban Tommy" data-price="6990">
+        
         <div class="swatch"><img src="images/pack-05-urban-tommy.jpg" alt="Pack Urban Tommy" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Urban Tommy</div>
-          <div class="p-desc">5 pares, franjas + estrella, estilo urbano.</div>
+          <div class="p-desc">5 pares, franjas + estrella, estilo urbano. Material: algodón.</div>
           <div class="p-price">$6.990</div>
           <button class="p-cta" onclick="addToCart('p4','Pack Urban Tommy',6990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="hombre" data-name="Pack Essential Men" data-price="1990">
+        
         <div class="swatch"><img src="images/pack-06-essential-men.jpg" alt="Pack Essential Men" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Essential Men</div>
-          <div class="p-desc">3 pares, básico diario, patrón diamante.</div>
+          <div class="p-desc">3 pares, básico diario, patrón diamante. Material: bambú.</div>
           <div class="p-price">$1.990</div>
           <button class="p-cta" onclick="addToCart('p5','Pack Essential Men',1990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Doggy Colors" data-price="4490">
+        
         <div class="swatch"><img src="images/pack-07-doggy-colors.jpg" alt="Pack Doggy Colors" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Doggy Colors</div>
-          <div class="p-desc">6 pares, estampado perritos y gatitos.</div>
+          <div class="p-desc">6 pares, estampado perritos y gatitos. Material: bambú y algodón.</div>
           <div class="p-price">$4.490</div>
           <button class="p-cta" onclick="addToCart('p6','Pack Doggy Colors',4490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Emoji" data-price="4990">
+        
         <div class="swatch"><img src="images/pack-08-emoji.jpg" alt="Pack Emoji" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Emoji</div>
-          <div class="p-desc">6 pares, carita feliz surtida.</div>
+          <div class="p-desc">6 pares, carita feliz surtida. Material: algodón.</div>
           <div class="p-price">$4.990</div>
           <button class="p-cta" onclick="addToCart('p7','Pack Emoji',4990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Basic Mujer" data-price="7490">
+        
         <div class="swatch"><img src="images/pack-09-basic-mujer.jpg" alt="Pack Basic Mujer" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Basic Mujer</div>
-          <div class="p-desc">6 pares, negro y blanco, básicos de calidad.</div>
+          <div class="p-desc">6 pares, negro y blanco, básicos de calidad. Material: bambú perfumado.</div>
           <div class="p-price">$7.490</div>
           <button class="p-cta" onclick="addToCart('p8','Pack Basic Mujer',7490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Smile" data-price="3990">
+        
         <div class="swatch"><img src="images/pack-10-smile.jpg" alt="Pack Smile" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Smile</div>
-          <div class="p-desc">3 pares, crew smile en 3 colores.</div>
+          <div class="p-desc">3 pares, crew smile en 3 colores. Material: algodón.</div>
           <div class="p-price">$3.990</div>
           <button class="p-cta" onclick="addToCart('p9','Pack Smile',3990,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Springs" data-price="3750">
+        
         <div class="swatch"><img src="images/pack-springs.jpg" alt="Pack Springs" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Springs</div>
-          <div class="p-desc">3 pares, frutas y flores bordadas, tobillera blanca.</div>
+          <div class="p-desc">3 pares, frutas y flores bordadas, tobillera blanca. Material: algodón.</div>
           <div class="p-price">$3.750</div>
           <button class="p-cta" onclick="addToCart('p10','Pack Springs',3750,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Urban Bear" data-price="5990">
+        
         <div class="swatch"><img src="images/pack-11-urban-bear.jpg" alt="Pack Urban Bear" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Urban Bear</div>
@@ -278,33 +298,37 @@
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Pastel Mood" data-price="6490">
+        
         <div class="swatch"><img src="images/pack-12-pastel-mood.jpg" alt="Pack Pastel Mood" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Pastel Mood</div>
-          <div class="p-desc">6 pares, animalitos en tonos pastel.</div>
+          <div class="p-desc">6 pares, animalitos en tonos pastel. Material: algodón.</div>
           <div class="p-price">$6.490</div>
           <button class="p-cta" onclick="addToCart('p12','Pack Pastel Mood',6490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Moka" data-price="5490">
+        
         <div class="swatch"><img src="images/pack-13-moka.jpg" alt="Pack Moka" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Moka</div>
-          <div class="p-desc">7 pares, tonos café, erizo y acorn.</div>
+          <div class="p-desc">7 pares, tonos café, erizo y acorn. Material: algodón.</div>
           <div class="p-price">$5.490</div>
           <button class="p-cta" onclick="addToCart('p13','Pack Moka',5490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="mujer" data-name="Pack Celeste" data-price="5490">
+        
         <div class="swatch"><img src="images/pack-14-celeste.jpg" alt="Pack Celeste" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Celeste</div>
-          <div class="p-desc">7 pares, tonos celestes, perrito bordado.</div>
+          <div class="p-desc">7 pares, tonos celestes, perrito bordado. Material: algodón.</div>
           <div class="p-price">$5.490</div>
           <button class="p-cta" onclick="addToCart('p14','Pack Celeste',5490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="familiar" data-name="Promesse Family Sport" data-price="7490">
+        
         <div class="swatch"><img src="images/pack-15-family-sport.jpg" alt="Promesse Family Sport" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Promesse Family Sport</div>
@@ -314,33 +338,37 @@
         </div>
       </div>
       <div class="product-card" data-cat="juvenil" data-name="Pack Cherry" data-price="3490">
+        
         <div class="swatch"><img src="images/pack-16-cherry.jpg" alt="Pack Cherry" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Cherry</div>
-          <div class="p-desc">3 pares, cerezas bordadas, tobillera.</div>
+          <div class="p-desc">3 pares, cerezas bordadas, tobillera. Material: bambú.</div>
           <div class="p-price">$3.490</div>
           <button class="p-cta" onclick="addToCart('p16','Pack Cherry',3490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="juvenil" data-name="Pack Frutilla" data-price="3490">
+        
         <div class="swatch"><img src="images/pack-17-frutilla.jpg" alt="Pack Frutilla" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Frutilla</div>
-          <div class="p-desc">3 pares, frutillas y flores, tonos pastel.</div>
+          <div class="p-desc">3 pares, frutillas y flores, tonos pastel. Material: bambú.</div>
           <div class="p-price">$3.490</div>
           <button class="p-cta" onclick="addToCart('p17','Pack Frutilla',3490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="juvenil" data-name="Pack Durazno" data-price="3490">
+        
         <div class="swatch"><img src="images/pack-18-durazno.jpg" alt="Pack Durazno" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Durazno</div>
-          <div class="p-desc">3 pares, conejito y flores, tono durazno.</div>
+          <div class="p-desc">3 pares, conejito y flores, tono durazno. Material: bambú.</div>
           <div class="p-price">$3.490</div>
           <button class="p-cta" onclick="addToCart('p18','Pack Durazno',3490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="juvenil" data-name="Pack Diseños Girl" data-price="5190">
+        
         <div class="swatch"><img src="images/pack-19-disenos-girl.jpg" alt="Pack Diseños Girl" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Diseños Girl</div>
@@ -350,15 +378,17 @@
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Coco" data-price="3490">
+        
         <div class="swatch"><img src="images/pack-20-coco.jpg" alt="Pack Coco" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Coco</div>
-          <div class="p-desc">3 pares, tonos tierra, moño y erizo.</div>
+          <div class="p-desc">3 pares, tonos tierra, moño y erizo. Material: bambú.</div>
           <div class="p-price">$3.490</div>
           <button class="p-cta" onclick="addToCart('p20','Pack Coco',3490,this)">Agregar</button>
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Stitch 2-4 años" data-price="3790">
+        
         <div class="swatch"><img src="images/pack-21-stitch-nino.jpg" alt="Pack Stitch 2-4 años" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Stitch 2-4 años</div>
@@ -368,6 +398,7 @@
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Stitch 4-6 años" data-price="3890">
+        
         <div class="swatch"><img src="images/pack-22-stitch-nina.jpg" alt="Pack Stitch 4-6 años" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Stitch 4-6 años</div>
@@ -377,6 +408,7 @@
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Stitch 6-8 años" data-price="3890">
+        
         <div class="swatch"><img src="images/pack-21-stitch-nino.jpg" alt="Pack Stitch 6-8 años" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Stitch 6-8 años</div>
@@ -386,6 +418,7 @@
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Minnie" data-price="5190">
+        
         <div class="swatch"><img src="images/pack-24-minnie.jpg" alt="Pack Minnie" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Minnie</div>
@@ -395,6 +428,7 @@
         </div>
       </div>
       <div class="product-card" data-cat="infantil" data-name="Pack Mickey" data-price="5190">
+        
         <div class="swatch"><img src="images/pack-25-mickey.jpg" alt="Pack Mickey" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Mickey</div>
