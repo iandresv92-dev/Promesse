@@ -1,0 +1,21 @@
+
+farevalos / fabi_56#2_2
+tpolanco / tami_98$5_5
+asalazar / almi42.$%_8
+ivasquez / aivan#24_90
+
+secret_key gh7k2mP9xQr4nL8wE3vT6yU1sA5bC0dF
+
+git add .
+git commit -m "fix correccion busqueda de venta de pedidos nuevos"
+git push origin main
+
+postgresql://postgres:aivan#24_90@db.xfofsurejkfaaswiuqog.supabase.co:5432/postgres
+
+
+git remote add origin https://github.com/iandresv92-dev/golden-home-app.git
+
+postgresql://postgres.xfofsurejkfaaswiuqog:aivan#24_90@aws-1-us-east-1.pooler.supabase.com:6543/postgres
+
+pg_dump "postgresql://postgres.xfofsurejkfaaswiuqog:aivan#24_90@aws-1-us-east-1.pooler.supabase.com:6543/postgres"
+     > "respaldo_produccion_$(Get-Date -Format 'yyyy-MM-dd').sql"
