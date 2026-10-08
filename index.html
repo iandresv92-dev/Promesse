@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Promesse — Catálogo de Packs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --ink:#2B1D16;
+    --ink-soft:#5E4B41;
+    --paper:#FBF6F2;
+    --card:#FFFFFF;
+    --rose:#E7BDB0;
+    --rose-deep:#C9836C;
+    --rose-pale:#F5E4DD;
+    --line:#EEDFD7;
+    --wa:#2FAE60;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; background:var(--paper); overscroll-behavior-y:none; }
+  body{
+    background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif;
+    padding-bottom:90px; overscroll-behavior-y:none;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; letter-spacing:-0.01em; }
+
+  header{
+    position:sticky; top:0; z-index:60; background:var(--paper);
+    padding:12px 18px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:9px; }
+  .brand img{ width:34px; height:34px; object-fit:contain; }
+  .brand-name{ font-family:'Caveat', cursive; font-weight:700; font-size:24px; line-height:1; color:var(--ink); }
+  .brand-tag{ font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:1px;}
+  .cart-btn{
+    position:relative; background:var(--ink); color:var(--paper); border:none;
+    width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .cart-count{
+    position:absolute; top:-4px; right:-4px; background:var(--rose-deep); color:#fff;
+    font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--paper);
+  }
+
+  .hero{
+    padding:30px 20px 22px;
+    background: radial-gradient(circle at 88% -15%, var(--rose-pale), transparent 55%), var(--paper);
+    position:relative; overflow:hidden;
+  }
+  .hero .eyebrow{ position:relative; z-index:2; font-size:11.5px; text-transform:uppercase; letter-spacing:0.14em; color:var(--rose-deep); font-weight:700; margin-bottom:8px; }
+  .hero h1{ position:relative; z-index:2; font-size:26px; font-weight:600; line-height:1.2; max-width:280px; }
+  .hero p{ position:relative; z-index:2; margin-top:8px; font-size:13.5px; color:var(--ink-soft); max-width:290px; line-height:1.5; }
+  .hero-sheep{ position:absolute; right:-10px; top:10px; width:110px; opacity:0.14; z-index:1; pointer-events:none; }
+
+  .section-head{ padding:22px 20px 8px; background:var(--paper); position:relative; z-index:2; }
+  .section-head h2{ font-size:18px; font-weight:600; color:var(--ink); }
+
+  .chips{ display:flex; gap:8px; overflow-x:auto; padding:6px 20px 12px; background:var(--paper); }
+  .chips::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex-shrink:0; padding:8px 15px; border-radius:20px; font-size:12.5px; font-weight:600;
+    border:1px solid var(--line); background:var(--card); color:var(--ink-soft); cursor:pointer; white-space:nowrap;
+  }
+  .chip.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 20px 20px; }
+  .product-card{ background:var(--card); border-radius:18px; border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; position:relative; }
+  .product-card.soldout{ opacity:0.75; }
+  .product-card.soldout .swatch img{ filter:grayscale(100%); }
+  .p-badge{
+    position:absolute; top:10px; right:10px; z-index:10; background:rgba(43,29,22,0.88);
+    color:#fff; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700;
+    text-align:center; letter-spacing:0.03em;
+  }
+  .swatch{ aspect-ratio:1/1; overflow:hidden; background:var(--rose-pale); position:relative; }
+  .swatch img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .p-info{ padding:10px 12px 12px; flex:1; display:flex; flex-direction:column; }
+  .p-name{ font-weight:600; font-size:13px; line-height:1.3; font-family:'Fraunces',serif; }
+  .p-desc{ font-size:10.5px; color:var(--ink-soft); margin-top:4px; line-height:1.4; flex:1; }
+  .p-price{ font-family:'Fraunces',serif; font-weight:700; font-size:16px; margin-top:8px; }
+  .p-cta{
+    margin-top:8px; background:var(--ink); color:var(--paper); border:none;
+    font-size:12px; font-weight:600; padding:9px; border-radius:10px; cursor:pointer;
+  }
+  .p-cta.added{ background:#25914e; }
+  .p-cta.disabled{ background:#A89E99; cursor:not-allowed; opacity:0.6; }
+
+  .overlay{ position:fixed; inset:0; background:rgba(43,29,22,0.45); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:70; }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .cart-drawer{
+    position:fixed; top:0; right:0; height:100%; width:88%; max-width:380px; background:var(--paper); z-index:80;
+    transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column;
+    box-shadow:-8px 0 30px rgba(43,29,22,0.15);
+  }
+  .cart-drawer.open{ transform:translateX(0); }
+  .cart-head{ padding:18px 18px 14px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+  .cart-head h3{ font-size:18px; font-weight:600; }
+  .cart-close{ background:none; border:none; font-size:20px; color:var(--ink-soft); cursor:pointer; width:32px; height:32px; }
+  .cart-items{ flex:1; overflow-y:auto; padding:10px 18px; }
+  .cart-empty{ text-align:center; color:var(--ink-soft); font-size:13px; margin-top:40px; padding:0 20px; line-height:1.6; }
+  .cart-empty img{ width:70px; opacity:0.5; margin-bottom:12px; }
+  .cart-item{ display:flex; gap:10px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .cart-item .ci-info{ flex:1; }
+  .cart-item .ci-name{ font-size:13px; font-weight:600; font-family:'Fraunces',serif; }
+  .cart-item .ci-price{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .qty-control{ display:flex; align-items:center; gap:10px; margin-top:6px; }
+  .qty-control button{ width:22px; height:22px; border-radius:6px; border:1px solid var(--line); background:#fff; font-size:13px; cursor:pointer; color:var(--ink); }
+  .qty-control span{ font-size:12.5px; font-weight:600; min-width:14px; text-align:center; }
+  .ci-remove{ background:none; border:none; color:#B7A79D; font-size:11px; margin-left:auto; cursor:pointer; text-decoration:underline; }
+  .ci-right{ display:flex; flex-direction:column; align-items:flex-end; }
+  .cart-foot{ padding:16px 18px 20px; border-top:1px solid var(--line); }
+  .cart-total-row{ display:flex; justify-content:space-between; font-size:14px; margin-bottom:12px; }
+  .cart-total-row strong{ font-family:'Fraunces',serif; font-size:19px; }
+  .checkout-btn{
+    width:100%; background:var(--wa); color:#fff; border:none; padding:13px; border-radius:14px;
+    font-size:14.5px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;
+  }
+  .checkout-note{ font-size:10.5px; color:var(--ink-soft); text-align:center; margin-top:8px; line-height:1.5; }
+
+  .sticky-bar{
+    position:fixed; left:14px; right:14px; bottom:14px; z-index:65; background:var(--ink); color:var(--paper);
+    border-radius:18px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    box-shadow:0 8px 24px rgba(43,29,22,0.28); transform:translateY(140%); transition:transform .25s ease;
+  }
+  .sticky-bar.show{ transform:translateY(0); }
+  .sticky-bar .sb-info{ display:flex; flex-direction:column; }
+  .sticky-bar .sb-count{ font-size:10.5px; color:#D9C6BC; }
+  .sticky-bar .sb-total{ font-family:'Fraunces',serif; font-size:16px; font-weight:600; }
+  .sticky-bar button{ background:var(--wa); color:#fff; border:none; font-size:12.5px; font-weight:700; padding:10px 16px; border-radius:12px; display:flex; align-items:center; gap:6px; cursor:pointer; }
+
+  .site-footer{ margin:20px 20px 0; padding:24px 20px; border-radius:20px; background:var(--ink); color:var(--paper); display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+  .site-footer img{ width:44px; height:44px; object-fit:contain; background:var(--paper); border-radius:12px; padding:7px; }
+  .site-footer h3{ font-size:16px; }
+  .site-footer .domain{ font-family:monospace; background:rgba(255,255,255,0.08); display:inline-block; padding:4px 10px; border-radius:8px; font-size:12px; }
+  .site-footer a{ color:var(--rose); font-size:12px; font-weight:600; text-decoration:none; }
+
+  @media(min-width:480px){ .grid{ grid-template-columns:1fr 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="images/monogram.png" alt="Promesse">
+    <div>
+      <div class="brand-name">promesse</div>
+      <div class="brand-tag">Detalles que abrigan</div>
+    </div>
+  </div>
+  <button class="cart-btn" id="cartOpenBtn" aria-label="Ver carrito">
+    🛒
+    <span class="cart-count" id="cartCount" style="display:none;">0</span>
+  </button>
+</header>
+
+<section class="hero">
+  <img class="hero-sheep" src="images/sheep-icon.png" alt="">
+  <div class="eyebrow">Catálogo de packs</div>
+  <h1>Packs de calcetines para toda la familia</h1>
+  <p>Elige tus packs favoritos, arma tu pedido y ciérralo directo por WhatsApp.</p>
+</section>
+
+<div class="section-head"><h2>Nuestros packs</h2></div>
+<div class="chips">
+<div class="chip active" data-f="all">Todos</div>
+  <div class="chip" data-f="hombre">Hombre</div>
+  <div class="chip" data-f="mujer">Mujer</div>
+  <div class="chip" data-f="juvenil">Juvenil</div>
+  <div class="chip" data-f="infantil">Infantil</div>
+  <div class="chip" data-f="familiar">Familiar</div>
+</div>
+
+<div class="grid" id="grid">
+      <div class="product-card" data-cat="hombre" data-name="Pack Sin Costura Men" data-price="6990">
+        
+        <div class="swatch"><img src="images/pack-01-sin-costura-men.jpg" alt="Pack Sin Costura Men" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Sin Costura Men</div>
+          <div class="p-desc">6 pares, Hombre, sin costura, para el día a día. Material: bambú. Talla: 39-46.</div>
+          <div class="p-price">$6.990</div>
+          <button class="p-cta" onclick="addToCart('p0','Pack Sin Costura Men',6990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Juvenil Men" data-price="7990">
+        
+        <div class="swatch"><img src="images/pack-02-juvenil-men.jpg" alt="Pack Juvenil Men" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Juvenil Men</div>
+          <div class="p-desc">7 pares, Hombre, diseños Boston + básicos. Material: algodón y bambú. Talla: 39-45 a 40-48.</div>
+          <div class="p-price">$7.990</div>
+          <button class="p-cta" onclick="addToCart('p1','Pack Juvenil Men',7990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Sport Men" data-price="6490">
+        
+        <div class="swatch"><img src="images/pack-03-sport-men.jpg" alt="Pack Sport Men" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Sport Men</div>
+          <div class="p-desc">6 pares, Hombre, línea deportiva Butter, tobillera. Talla: 39-48.</div>
+          <div class="p-price">$6.490</div>
+          <button class="p-cta" onclick="addToCart('p2','Pack Sport Men',6490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Urban Vans" data-price="6490">
+        
+        <div class="swatch"><img src="images/pack-04-urban-vans.jpg" alt="Pack Urban Vans" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Urban Vans</div>
+          <div class="p-desc">5 pares, Hombre, estilo urbano, ajedrez + estrella. Material: algodón. Talla: 40-48.</div>
+          <div class="p-price">$6.490</div>
+          <button class="p-cta" onclick="addToCart('p3','Pack Urban Vans',6490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Urban Tommy" data-price="6990">
+        
+        <div class="swatch"><img src="images/pack-05-urban-tommy.jpg" alt="Pack Urban Tommy" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Urban Tommy</div>
+          <div class="p-desc">5 pares, Hombre, franjas + estrella, estilo urbano. Material: algodón. Talla: 40-48.</div>
+          <div class="p-price">$6.990</div>
+          <button class="p-cta" onclick="addToCart('p4','Pack Urban Tommy',6990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Essential Men" data-price="1990">
+        
+        <div class="swatch"><img src="images/pack-06-essential-men.jpg" alt="Pack Essential Men" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Essential Men</div>
+          <div class="p-desc">3 pares, Hombre, básico diario, patrón diamante. Material: bambú. Talla: 39-45.</div>
+          <div class="p-price">$1.990</div>
+          <button class="p-cta" onclick="addToCart('p5','Pack Essential Men',1990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Doggy Colors" data-price="4490">
+        
+        <div class="swatch"><img src="images/pack-07-doggy-colors.jpg" alt="Pack Doggy Colors" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Doggy Colors</div>
+          <div class="p-desc">6 pares, Mujer, estampado perritos y gatitos. Material: bambú y algodón. Talla: 34-41.</div>
+          <div class="p-price">$4.490</div>
+          <button class="p-cta" onclick="addToCart('p6','Pack Doggy Colors',4490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Emoji" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-08-emoji.jpg" alt="Pack Emoji" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Emoji</div>
+          <div class="p-desc">6 pares, Mujer, carita feliz surtida. Material: algodón. Talla: 34-40.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p7','Pack Emoji',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Basic Mujer" data-price="7490">
+        
+        <div class="swatch"><img src="images/pack-09-basic-mujer.jpg" alt="Pack Basic Mujer" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Basic Mujer</div>
+          <div class="p-desc">6 pares, Mujer, negro y blanco, básicos de calidad. Material: bambú perfumado. Talla: 35-40.</div>
+          <div class="p-price">$7.490</div>
+          <button class="p-cta" onclick="addToCart('p8','Pack Basic Mujer',7490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Smile" data-price="3990">
+        
+        <div class="swatch"><img src="images/pack-10-smile.jpg" alt="Pack Smile" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Smile</div>
+          <div class="p-desc">3 pares, Mujer, crew smile en 3 colores. Material: algodón. Talla: 34-40.</div>
+          <div class="p-price">$3.990</div>
+          <button class="p-cta" onclick="addToCart('p9','Pack Smile',3990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Springs" data-price="3750">
+        
+        <div class="swatch"><img src="images/pack-springs.jpg" alt="Pack Springs" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Springs</div>
+          <div class="p-desc">3 pares, Mujer, frutas y flores bordadas, tobillera blanca. Material: algodón. Talla: 34-40.</div>
+          <div class="p-price">$3.750</div>
+          <button class="p-cta" onclick="addToCart('p10','Pack Springs',3750,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Urban Bear" data-price="5990">
+        
+        <div class="swatch"><img src="images/pack-11-urban-bear.jpg" alt="Pack Urban Bear" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Urban Bear</div>
+          <div class="p-desc">5 pares, Mujer, osito bordado + básicos a rayas. Talla: 34-40.</div>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('p11','Pack Urban Bear',5990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Pastel Mood" data-price="6490">
+        
+        <div class="swatch"><img src="images/pack-12-pastel-mood.jpg" alt="Pack Pastel Mood" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Pastel Mood</div>
+          <div class="p-desc">6 pares, Mujer, animalitos en tonos pastel. Material: algodón. Talla: 34-40.</div>
+          <div class="p-price">$6.490</div>
+          <button class="p-cta" onclick="addToCart('p12','Pack Pastel Mood',6490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Moka" data-price="5490">
+        
+        <div class="swatch"><img src="images/pack-13-moka.jpg" alt="Pack Moka" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Moka</div>
+          <div class="p-desc">7 pares, Mujer, tonos café, erizo y acorn. Material: algodón. Talla: 34-41.</div>
+          <div class="p-price">$5.490</div>
+          <button class="p-cta" onclick="addToCart('p13','Pack Moka',5490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Celeste" data-price="5490">
+        
+        <div class="swatch"><img src="images/pack-14-celeste.jpg" alt="Pack Celeste" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Celeste</div>
+          <div class="p-desc">7 pares, Mujer, tonos celestes, perrito bordado. Material: algodón. Talla: 34-41.</div>
+          <div class="p-price">$5.490</div>
+          <button class="p-cta" onclick="addToCart('p14','Pack Celeste',5490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Promesse Family Sport" data-price="7490">
+        
+        <div class="swatch"><img src="images/pack-15-family-sport.jpg" alt="Promesse Family Sport" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Promesse Family Sport</div>
+          <div class="p-desc">9 pares, Familia, a rayas. Talla: Niño 30-33, Mujer 35-41, Hombre 39-46.</div>
+          <div class="p-price">$7.490</div>
+          <button class="p-cta" onclick="addToCart('p15','Promesse Family Sport',7490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="juvenil" data-name="Pack Cherry" data-price="3490">
+        
+        <div class="swatch"><img src="images/pack-16-cherry.jpg" alt="Pack Cherry" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Cherry</div>
+          <div class="p-desc">3 pares, Juvenil, cerezas bordadas, tobillera. Material: bambú. Talla: 36-41.</div>
+          <div class="p-price">$3.490</div>
+          <button class="p-cta" onclick="addToCart('p16','Pack Cherry',3490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="juvenil" data-name="Pack Frutilla" data-price="3490">
+        
+        <div class="swatch"><img src="images/pack-17-frutilla.jpg" alt="Pack Frutilla" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Frutilla</div>
+          <div class="p-desc">3 pares, Juvenil, frutillas y flores, tonos pastel. Material: bambú. Talla: 36-41.</div>
+          <div class="p-price">$3.490</div>
+          <button class="p-cta" onclick="addToCart('p17','Pack Frutilla',3490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="juvenil" data-name="Pack Durazno" data-price="3490">
+        
+        <div class="swatch"><img src="images/pack-18-durazno.jpg" alt="Pack Durazno" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Durazno</div>
+          <div class="p-desc">3 pares, Juvenil, conejito y flores, tono durazno. Material: bambú. Talla: 36-41.</div>
+          <div class="p-price">$3.490</div>
+          <button class="p-cta" onclick="addToCart('p18','Pack Durazno',3490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="juvenil" data-name="Pack Diseños Girl" data-price="5190">
+        
+        <div class="swatch"><img src="images/pack-19-disenos-girl.jpg" alt="Pack Diseños Girl" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Diseños Girl</div>
+          <div class="p-desc">3 pares, Niña, diseños variados, crew negro/blanco. Talla: 34-40.</div>
+          <div class="p-price">$5.190</div>
+          <button class="p-cta" onclick="addToCart('p19','Pack Diseños Girl',5190,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Coco" data-price="3490">
+        
+        <div class="swatch"><img src="images/pack-20-coco.jpg" alt="Pack Coco" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Coco</div>
+          <div class="p-desc">3 pares, Niño/Niña, tonos tierra, moño y erizo. Material: bambú. Talla: 36-41.</div>
+          <div class="p-price">$3.490</div>
+          <button class="p-cta" onclick="addToCart('p20','Pack Coco',3490,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Stitch 2-4 años" data-price="3790">
+        
+        <div class="swatch"><img src="images/pack-21-stitch-nino.jpg" alt="Pack Stitch 2-4 años" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Stitch 2-4 años</div>
+          <div class="p-desc">3 pares, Talla 2-4. Disponible en versión niño (celeste) o niña (rosa) — indícanos tu preferencia al cotizar.</div>
+          <div class="p-price">$3.790</div>
+          <button class="p-cta" onclick="addToCart('p21','Pack Stitch 2-4 años',3790,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Stitch 4-6 años" data-price="3890">
+        
+        <div class="swatch"><img src="images/pack-22-stitch-nina.jpg" alt="Pack Stitch 4-6 años" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Stitch 4-6 años</div>
+          <div class="p-desc">3 pares, Talla 4-6. Disponible en versión niño (celeste) o niña (rosa) — indícanos tu preferencia al cotizar.</div>
+          <div class="p-price">$3.890</div>
+          <button class="p-cta" onclick="addToCart('p22','Pack Stitch 4-6 años',3890,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Stitch 6-8 años" data-price="3890">
+        
+        <div class="swatch"><img src="images/pack-21-stitch-nino.jpg" alt="Pack Stitch 6-8 años" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Stitch 6-8 años</div>
+          <div class="p-desc">3 pares, Talla 6-8. Disponible en versión niño (celeste) o niña (rosa) — indícanos tu preferencia al cotizar.</div>
+          <div class="p-price">$3.890</div>
+          <button class="p-cta" onclick="addToCart('p23','Pack Stitch 6-8 años',3890,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Minnie" data-price="5190">
+        
+        <div class="swatch"><img src="images/pack-24-minnie.jpg" alt="Pack Minnie" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Minnie</div>
+          <div class="p-desc">4 pares, Niña, licencia oficial Disney. Talla: 10-12.</div>
+          <div class="p-price">$5.190</div>
+          <button class="p-cta" onclick="addToCart('p24','Pack Minnie',5190,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Mickey" data-price="5190">
+        
+        <div class="swatch"><img src="images/pack-25-mickey.jpg" alt="Pack Mickey" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Mickey</div>
+          <div class="p-desc">4 pares, Niño, licencia oficial Disney. Talla: 10-12.</div>
+          <div class="p-price">$5.190</div>
+          <button class="p-cta" onclick="addToCart('p25','Pack Mickey',5190,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Bambú Men" data-price="3690">
+        
+        <div class="swatch"><img src="images/pack-new-00.jpg" alt="Pack Bambú Men" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Bambú Men</div>
+          <div class="p-desc">3 pares, Hombre, calcetín básico. Material: bambú. Talla: 39-45.</div>
+          <div class="p-price">$3.690</div>
+          <button class="p-cta" onclick="addToCart('p26','Pack Bambú Men',3690,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Bambú Invisible" data-price="5990">
+        
+        <div class="swatch"><img src="images/pack-new-01.jpg" alt="Pack Bambú Invisible" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Bambú Invisible</div>
+          <div class="p-desc">6 pares, Hombre, talonera sin costura. Material: bambú. Talla: 39-46.</div>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('p27','Pack Bambú Invisible',5990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Invisible Básico" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-02.jpg" alt="Pack Invisible Básico" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Invisible Básico</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura. Material: bambú. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p28','Pack Invisible Básico',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Invisible Gato" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-03.jpg" alt="Pack Invisible Gato" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Invisible Gato</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura con gato. Material: bambú. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p29','Pack Invisible Gato',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Invisible Conejo" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-04.jpg" alt="Pack Invisible Conejo" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Invisible Conejo</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura con conejo. Material: bambú. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p30','Pack Invisible Conejo',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Básico Niña" data-price="3990">
+        
+        <div class="swatch"><img src="images/pack-new-05.jpg" alt="Pack Básico Niña" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Básico Niña</div>
+          <div class="p-desc">6 pares, Niña, tobillera sin costura. Material: bambú. Talla: 30-33.</div>
+          <div class="p-price">$3.990</div>
+          <button class="p-cta" onclick="addToCart('p31','Pack Básico Niña',3990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Blue Niño" data-price="3990">
+        
+        <div class="swatch"><img src="images/pack-new-06.jpg" alt="Pack Blue Niño" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Blue Niño</div>
+          <div class="p-desc">6 pares, Niño, tobillera sin costura. Material: bambú. Talla: 33-36.</div>
+          <div class="p-price">$3.990</div>
+          <button class="p-cta" onclick="addToCart('p32','Pack Blue Niño',3990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Confort Diabético Mujer" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-07.jpg" alt="Pack Confort Diabético Mujer" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Confort Diabético Mujer</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura, diseño ergonómico. Material: algodón. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p33','Pack Confort Diabético Mujer',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Confort Diabético Hombre" data-price="6990">
+        
+        <div class="swatch"><img src="images/pack-new-08.jpg" alt="Pack Confort Diabético Hombre" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Confort Diabético Hombre</div>
+          <div class="p-desc">6 pares, Hombre, calcetín sin costura, diseño ergonómico. Material: algodón. Talla: 39-46.</div>
+          <div class="p-price">$6.990</div>
+          <button class="p-cta" onclick="addToCart('p34','Pack Confort Diabético Hombre',6990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Bambú Diabético Mujer" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-09.jpg" alt="Pack Bambú Diabético Mujer" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Bambú Diabético Mujer</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura, diseño ergonómico. Material: bambú. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p35','Pack Bambú Diabético Mujer',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Cobre Sin Costura Mujer" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-10.jpg" alt="Pack Cobre Sin Costura Mujer" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Cobre Sin Costura Mujer</div>
+          <div class="p-desc">6 pares, Mujer, tobillera sin costura con hilos de cobre. Talla: 35-41.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p36','Pack Cobre Sin Costura Mujer',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Mickey Short 6-8" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-11.jpg" alt="Pack Mickey Short 6-8" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Mickey Short 6-8</div>
+          <div class="p-desc">4 pares, Niño, licencia oficial Disney. Talla: 6-8.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p37','Pack Mickey Short 6-8',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Mickey Short 8-10" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-12.jpg" alt="Pack Mickey Short 8-10" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Mickey Short 8-10</div>
+          <div class="p-desc">4 pares, Niño, licencia oficial Disney. Talla: 8-10.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p38','Pack Mickey Short 8-10',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Minnie Short 4-6" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-11.jpg" alt="Pack Minnie Short 4-6" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Minnie Short 4-6</div>
+          <div class="p-desc">4 pares, Niña, licencia oficial Disney. Talla: 4-6.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p39','Pack Minnie Short 4-6',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Minnie Short 6-8" data-price="4990">
+        
+        <div class="swatch"><img src="images/pack-new-12.jpg" alt="Pack Minnie Short 6-8" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Minnie Short 6-8</div>
+          <div class="p-desc">4 pares, Niña, licencia oficial Disney. Talla: 6-8.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('p40','Pack Minnie Short 6-8',4990,this)">Agregar</button>
+        </div>
+      </div></div>
+
+<div class="site-footer">
+  <img src="images/monogram.png" alt="Promesse">
+  <h3>promesse.cl</h3>
+  <div class="domain">Hosting propio · packs actualizados</div>
+  <a href="https://www.instagram.com/promesse.cl" target="_blank">@promesse.cl en Instagram →</a>
+</div>
+
+<div class="sticky-bar" id="stickyBar">
+  <div class="sb-info">
+    <span class="sb-count" id="sbCount">0 productos</span>
+    <span class="sb-total" id="sbTotal">$0</span>
+  </div>
+  <button id="stickyCheckoutBtn">💬 Cotizar por WhatsApp</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Tu pedido</h3>
+    <button class="cart-close" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>Total</span><strong id="cartTotal">$0</strong></div>
+    <button class="checkout-btn" id="checkoutBtn">💬 Cerrar pedido por WhatsApp</button>
+    <div class="checkout-note">Se abrirá WhatsApp con el detalle de tu pedido listo para enviar.</div>
+  </div>
+</div>
+
+<script>
+  const WA_NUMBER = "56988941425";
+  function money(n){ return '$' + n.toLocaleString('es-CL'); }
+
+  let cart = {};
+  function cartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
+  function cartTotal(){ return Object.values(cart).reduce((s,i)=>s+i.qty*i.price,0); }
+
+  function addToCart(id, name, price, btn){
+    if(!cart[id]) cart[id] = {name, price, qty:0};
+    cart[id].qty += 1;
+    renderCart(); updateCartBadge();
+    if(btn){
+      btn.classList.add('added');
+      const original = btn.textContent;
+      btn.textContent = '✓ Agregado';
+      setTimeout(()=>{ btn.classList.remove('added'); btn.textContent = original; }, 1100);
+    }
+  }
+  function changeQty(id, delta){
+    if(!cart[id]) return;
+    cart[id].qty += delta;
+    if(cart[id].qty <= 0) delete cart[id];
+    renderCart(); updateCartBadge();
+  }
+  function removeItem(id){ delete cart[id]; renderCart(); updateCartBadge(); }
+
+  function updateCartBadge(){
+    const c = cartCount();
+    const badge = document.getElementById('cartCount');
+    badge.textContent = c; badge.style.display = c > 0 ? 'flex' : 'none';
+    const bar = document.getElementById('stickyBar');
+    if(c > 0){
+      bar.classList.add('show');
+      document.getElementById('sbCount').textContent = c + (c===1 ? ' producto' : ' productos');
+      document.getElementById('sbTotal').textContent = money(cartTotal());
+    } else { bar.classList.remove('show'); }
+  }
+  function renderCart(){
+    const wrap = document.getElementById('cartItems');
+    const ids = Object.keys(cart);
+    if(ids.length === 0){
+      wrap.innerHTML = `<div class="cart-empty"><img src="images/sheep-icon.png" alt=""><div>Tu carrito está vacío.<br>Agrega packs del catálogo.</div></div>`;
+    } else {
+      wrap.innerHTML = ids.map(id=>{
+        const it = cart[id];
+        return `<div class="cart-item">
+          <div class="ci-info">
+            <div class="ci-name">${it.name}</div>
+            <div class="ci-price">${money(it.price)} c/u</div>
+            <div class="qty-control">
+              <button onclick="changeQty('${id}',-1)">−</button><span>${it.qty}</span><button onclick="changeQty('${id}',1)">+</button>
+            </div>
+          </div>
+          <div class="ci-right">
+            <div style="font-weight:700; font-size:13px;">${money(it.price*it.qty)}</div>
+            <button class="ci-remove" onclick="removeItem('${id}')">quitar</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('cartTotal').textContent = money(cartTotal());
+  }
+
+  function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+  function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+  document.getElementById('cartOpenBtn').addEventListener('click', openCart);
+  document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+  document.getElementById('overlay').addEventListener('click', closeCart);
+
+  function doCheckout(){
+    const ids = Object.keys(cart);
+    if(ids.length === 0){ alert('Tu carrito está vacío. Agrega productos antes de continuar.'); return; }
+    let msg = "Hola! Quiero hacer este pedido:%0A%0A";
+    ids.forEach(id=>{ const it = cart[id]; msg += `• ${it.name} — Cant: ${it.qty} — ${money(it.price*it.qty)}%0A`; });
+    msg += `%0ATotal: ${money(cartTotal())}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+  }
+  document.getElementById('checkoutBtn').addEventListener('click', doCheckout);
+  document.getElementById('stickyCheckoutBtn').addEventListener('click', doCheckout);
+
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.f;
+      document.querySelectorAll('.product-card').forEach(card=>{
+        card.style.display = (f==='all' || card.dataset.cat===f) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  renderCart();
+</script>
+
+</body>
+</html>
