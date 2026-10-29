@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Packs de calcetines en Chile | Promesse</title>
+<title>Promesse</title>
 <meta name="description" content="Packs de calcetines en Chile para hombre, mujer, juvenil, infantil y familia. Bambú, algodón y líneas de confort. Arma tu pedido y cotiza por WhatsApp.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.promesse.cl/">
@@ -171,6 +171,30 @@
   .site-footer a{ color:var(--rose); font-size:12px; font-weight:600; text-decoration:none; }
 
   @media(min-width:480px){ .grid{ grid-template-columns:1fr 1fr 1fr; } }
+
+  .gift-banner{ margin:0 20px 6px; background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; display:flex; gap:0; align-items:stretch; box-shadow:0 6px 18px rgba(201,131,108,0.14); }
+  .gift-banner img{ width:110px; height:auto; object-fit:cover; flex-shrink:0; }
+  .gb-text{ padding:12px 14px; display:flex; flex-direction:column; justify-content:center; }
+  .gb-tag{ align-self:flex-start; background:var(--rose-deep); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; letter-spacing:0.04em; }
+  .gb-text h3{ font-size:17px; font-weight:600; margin-top:6px; }
+  .gb-text p{ font-size:11.5px; color:var(--ink-soft); line-height:1.45; margin-top:4px; }
+  .gb-price{ font-family:'Fraunces',serif; font-weight:700; font-size:16px; color:var(--rose-deep); margin-top:6px; }
+
+  .gift-overlay{ position:fixed; inset:0; background:rgba(43,29,22,0.55); display:none; align-items:center; justify-content:center; padding:20px; z-index:90; }
+  .gift-overlay.open{ display:flex; }
+  .gift-modal{ background:var(--paper); border-radius:22px; width:100%; max-width:340px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.25); }
+  .gift-modal img{ width:100%; height:240px; object-fit:cover; display:block; }
+  .gm-body{ padding:16px 18px 18px; text-align:center; }
+  .gm-body h3{ font-size:19px; font-weight:600; }
+  .gm-body p{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:6px; }
+  .gm-price{ font-family:'Fraunces',serif; font-weight:700; font-size:20px; color:var(--rose-deep); margin-top:8px; }
+  .gm-yes{ width:100%; margin-top:12px; background:var(--wa); color:#fff; border:none; padding:12px; border-radius:14px; font-size:14px; font-weight:700; cursor:pointer; }
+  .gm-no{ width:100%; margin-top:8px; background:none; color:var(--ink-soft); border:1px solid var(--line); padding:10px; border-radius:14px; font-size:13px; font-weight:600; cursor:pointer; }
+
+  .cart-gift{ display:flex; gap:10px; padding:12px 0; border-top:1px solid var(--line); margin-top:4px; align-items:center; }
+  .cart-gift img{ width:56px; height:56px; object-fit:cover; border-radius:10px; flex-shrink:0; }
+  .cg-info{ flex:1; }
+  .gift-toggle{ margin-top:6px; background:var(--ink); color:var(--paper); border:none; font-size:11.5px; font-weight:600; padding:6px 10px; border-radius:8px; cursor:pointer; }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY3YLQ8Q1R"></script>
@@ -204,6 +228,16 @@
   <div class="eyebrow">Catálogo de packs</div>
   <h1>Packs de calcetines para toda la familia</h1>
   <p>Elige tus packs favoritos, arma tu pedido y ciérralo directo por WhatsApp.</p>
+</section>
+
+<section class="gift-banner">
+  <img src="images/caja-regalo.jpg" alt="Caja de regalo Promesse">
+  <div class="gb-text">
+    <span class="gb-tag">🎁 Nuevo</span>
+    <h3>Envío para regalo</h3>
+    <p>Recibe tus packs en nuestra caja de regalo Promesse, con cinta dorada, papel de seda y tarjeta.</p>
+    <div class="gb-price">Solo $1.490</div>
+  </div>
 </section>
 
 <div class="section-head"><h2>Nuestros packs</h2></div>
@@ -626,7 +660,134 @@
           <div class="p-price">$4.990</div>
           <button class="p-cta" onclick="addToCart('p40','Pack Minnie Short 6-8',4990,this)">Agregar</button>
         </div>
-      </div></div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Pink Girl" data-price="3990">
+        <div class="swatch"><img src="images/pack-n42.jpg" alt="Pack Pink Girl" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Pink Girl</div>
+          <div class="p-desc">6 pares, Niña, diseños de conejo, cerezas y rayas. Talla: 30-33.</div>
+          <div class="p-price">$3.990</div>
+          <button class="p-cta" onclick="addToCart('n42','Pack Pink Girl',3990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Paul Frank Set" data-price="5990">
+        <div class="swatch"><img src="images/pack-n43.jpg" alt="Pack Paul Frank Set" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Paul Frank Set</div>
+          <div class="p-desc">4 pares, Hombre, corto, diseño Paul Frank. Material: algodón. Talla: 39-45.</div>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n43','Pack Paul Frank Set',5990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Paul Frank Classic" data-price="5990">
+        <div class="swatch"><img src="images/pack-n44.jpg" alt="Pack Paul Frank Classic" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Paul Frank Classic</div>
+          <div class="p-desc">4 pares, Hombre, largo, diseño Paul Frank. Material: algodón. Talla: 39-45.</div>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n44','Pack Paul Frank Classic',5990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Cobre Active" data-price="4990">
+        <div class="swatch"><img src="images/pack-n45.jpg" alt="Pack Cobre Active" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Cobre Active</div>
+          <div class="p-desc">6 pares, Mujer, material: cobre. Talla: 33-39.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('n45','Pack Cobre Active',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Sport Colors" data-price="5990">
+        <div class="swatch"><img src="images/pack-n46.jpg" alt="Pack Sport Colors" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Sport Colors</div>
+          <div class="p-desc">6 pares, Mujer, material: algodón. Talla: 33-39.</div>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n46','Pack Sport Colors',5990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="infantil" data-name="Pack Bear Brown" data-price="4990">
+        <div class="swatch"><img src="images/pack-n47.jpg" alt="Pack Bear Brown" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Bear Brown</div>
+          <div class="p-desc">6 pares, Niña, material: bambú. Talla: 30-33.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('n47','Pack Bear Brown',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Snoopy Red Sock" data-price="8990">
+        <div class="swatch"><img src="images/pack-n48.jpg" alt="Pack Snoopy Red Sock" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Snoopy Red Sock</div>
+          <div class="p-desc">4 pares, Mujer, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n48','Pack Snoopy Red Sock',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hombre" data-name="Pack Colección Marvel" data-price="8990">
+        <div class="swatch"><img src="images/pack-n49.jpg" alt="Pack Colección Marvel" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Colección Marvel</div>
+          <div class="p-desc">4 pares surtidos de 5 diseños al azar, Hombre. Material: algodón. Talla: 39-45.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n49','Pack Colección Marvel',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Colección Harry Potter" data-price="8990">
+        <div class="swatch"><img src="images/pack-n50.jpg" alt="Pack Colección Harry Potter" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Colección Harry Potter</div>
+          <div class="p-desc">4 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n50','Pack Colección Harry Potter',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Snoopy Black White" data-price="8990">
+        <div class="swatch"><img src="images/pack-n51.jpg" alt="Pack Snoopy Black White" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Snoopy Black White</div>
+          <div class="p-desc">4 pares, Mujer, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n51','Pack Snoopy Black White',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Snoopy Girl" data-price="8990">
+        <div class="swatch"><img src="images/pack-n52.jpg" alt="Pack Snoopy Girl" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Snoopy Girl</div>
+          <div class="p-desc">4 pares, Mujer, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n52','Pack Snoopy Girl',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Bob Esponja" data-price="4990">
+        <div class="swatch"><img src="images/pack-n53.jpg" alt="Pack Bob Esponja" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Bob Esponja</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('n53','Pack Bob Esponja',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Hey Arnold" data-price="4990">
+        <div class="swatch"><img src="images/pack-n54.jpg" alt="Pack Hey Arnold" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Hey Arnold</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('n54','Pack Hey Arnold',4990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Rugrats" data-price="4990">
+        <div class="swatch"><img src="images/pack-n55.jpg" alt="Pack Rugrats" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Rugrats</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$4.990</div>
+          <button class="p-cta" onclick="addToCart('n55','Pack Rugrats',4990,this)">Agregar</button>
+        </div>
+      </div>
+</div>
 
 <div class="site-footer">
   <img src="images/monogram.png" alt="Promesse">
@@ -668,7 +829,6 @@
   function addToCart(id, name, price, btn){
     if(!cart[id]) cart[id] = {name, price, qty:0};
     cart[id].qty += 1;
-    track('add_to_cart', { currency:'CLP', value:price, items:[{ item_id:id, item_name:name, price:price, quantity:1 }] });
     renderCart(); updateCartBadge();
     if(btn){
       btn.classList.add('added');
@@ -728,23 +888,16 @@
   document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
   document.getElementById('overlay').addEventListener('click', closeCart);
 
-  function doCheckout(origen){
+  function doCheckout(){
     const ids = Object.keys(cart);
     if(ids.length === 0){ alert('Tu carrito está vacío. Agrega productos antes de continuar.'); return; }
     let msg = "Hola! Quiero hacer este pedido:%0A%0A";
     ids.forEach(id=>{ const it = cart[id]; msg += `• ${it.name} — Cant: ${it.qty} — ${money(it.price*it.qty)}%0A`; });
     msg += `%0ATotal: ${money(cartTotal())}`;
-    track('click_whatsapp', {
-      origen: origen,
-      currency: 'CLP',
-      value: cartTotal(),
-      num_packs: cartCount(),
-      items: ids.map(id=>({ item_id:id, item_name:cart[id].name, price:cart[id].price, quantity:cart[id].qty }))
-    });
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
   }
-  document.getElementById('checkoutBtn').addEventListener('click', ()=>doCheckout('carrito'));
-  document.getElementById('stickyCheckoutBtn').addEventListener('click', ()=>doCheckout('barra_inferior'));
+  document.getElementById('checkoutBtn').addEventListener('click', doCheckout);
+  document.getElementById('stickyCheckoutBtn').addEventListener('click', doCheckout);
 
   document.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click', ()=>{
@@ -763,6 +916,136 @@
   document.getElementById('cartOpenBtn').addEventListener('click', ()=>track('open_cart', { num_packs: cartCount() }));
 
   renderCart();
+</script>
+
+<div class="gift-overlay" id="giftOverlay">
+  <div class="gift-modal" role="dialog" aria-modal="true">
+    <img src="images/caja-regalo.jpg" alt="Caja de regalo Promesse">
+    <div class="gm-body">
+      <h3>¿Envío para regalo?</h3>
+      <p>Tu pack llega en nuestra caja de regalo Promesse, con cinta dorada, papel de seda y tarjeta.</p>
+      <div class="gm-price">+$1.490</div>
+      <button class="gm-yes" onclick="answerGift(true)">🎁 Sí, para regalo</button>
+      <button class="gm-no" onclick="answerGift(false)">No, gracias</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Caja de regalo: precio y estado. Cambia GIFT_PRICE aquí si cambia el valor.
+  const GIFT_PRICE = 1490;
+  let giftBox = null;       // null = aún no preguntado, true/false = decidido
+  let pendingAdd = null;
+
+  function cartSubtotal(){ return Object.values(cart).reduce((s,i)=>s+i.qty*i.price,0); }
+  function cartTotal(){ return cartSubtotal() + (giftBox ? GIFT_PRICE : 0); }
+
+  function commitAdd(id, name, price, btn){
+    if(!cart[id]) cart[id] = {name, price, qty:0};
+    cart[id].qty += 1;
+    track('add_to_cart', { currency:'CLP', value:price, items:[{ item_id:id, item_name:name, price:price, quantity:1 }] });
+    renderCart(); updateCartBadge();
+    if(btn){
+      btn.classList.add('added');
+      const original = btn.textContent;
+      btn.textContent = '✓ Agregado';
+      setTimeout(()=>{ btn.classList.remove('added'); btn.textContent = original; }, 1100);
+    }
+  }
+
+  function addToCart(id, name, price, btn){
+    if(giftBox === null){
+      pendingAdd = {id, name, price, btn};
+      document.getElementById('giftOverlay').classList.add('open');
+      return;
+    }
+    commitAdd(id, name, price, btn);
+  }
+
+  function answerGift(yes){
+    giftBox = yes;
+    document.getElementById('giftOverlay').classList.remove('open');
+    if(pendingAdd){
+      const p = pendingAdd; pendingAdd = null;
+      commitAdd(p.id, p.name, p.price, p.btn);
+    } else { renderCart(); updateCartBadge(); }
+  }
+
+  function toggleGift(){ giftBox = !giftBox; renderCart(); updateCartBadge(); }
+
+  function updateCartBadge(){
+    const c = cartCount();
+    const badge = document.getElementById('cartCount');
+    badge.textContent = c; badge.style.display = c > 0 ? 'flex' : 'none';
+    const bar = document.getElementById('stickyBar');
+    if(c > 0){
+      bar.classList.add('show');
+      document.getElementById('sbCount').textContent = c + (c===1 ? ' producto' : ' productos') + (giftBox ? ' + regalo' : '');
+      document.getElementById('sbTotal').textContent = money(cartTotal());
+    } else { bar.classList.remove('show'); }
+  }
+
+  function renderCart(){
+    const wrap = document.getElementById('cartItems');
+    const ids = Object.keys(cart);
+    if(ids.length === 0){
+      wrap.innerHTML = '<div class="cart-empty"><img src="images/sheep-icon.png" alt=""><div>Tu carrito está vacío.<br>Agrega packs del catálogo.</div></div>';
+    } else {
+      let html = ids.map(id=>{
+        const it = cart[id];
+        return `<div class="cart-item">
+          <div class="ci-info">
+            <div class="ci-name">${it.name}</div>
+            <div class="ci-price">${money(it.price)} c/u</div>
+            <div class="qty-control">
+              <button onclick="changeQty('${id}',-1)">−</button><span>${it.qty}</span><button onclick="changeQty('${id}',1)">+</button>
+            </div>
+          </div>
+          <div class="ci-right">
+            <div style="font-weight:700; font-size:13px;">${money(it.price*it.qty)}</div>
+            <button class="ci-remove" onclick="removeItem('${id}')">quitar</button>
+          </div>
+        </div>`;
+      }).join('');
+      html += `<div class="cart-gift">
+        <img src="images/caja-regalo.jpg" alt="Caja de regalo">
+        <div class="cg-info">
+          <div class="ci-name">🎁 Envío para regalo</div>
+          <div class="ci-price">${giftBox ? 'Incluido' : 'No incluido'} · ${money(GIFT_PRICE)}</div>
+          <button class="gift-toggle" onclick="toggleGift()">${giftBox ? 'Quitar caja de regalo' : 'Agregar caja de regalo'}</button>
+        </div>
+      </div>`;
+      wrap.innerHTML = html;
+    }
+    document.getElementById('cartTotal').textContent = money(cartTotal());
+  }
+
+  function doCheckout(origen){
+    const ids = Object.keys(cart);
+    if(ids.length === 0){ alert('Tu carrito está vacío. Agrega productos antes de continuar.'); return; }
+    const lines = ['Hola! Quiero hacer este pedido:', ''];
+    ids.forEach(id=>{ const it = cart[id]; lines.push(`• ${it.name} — Cant: ${it.qty} — ${money(it.price*it.qty)}`); });
+    lines.push('');
+    lines.push(giftBox ? `🎁 Caja de regalo: SÍ (+${money(GIFT_PRICE)})` : '🎁 Caja de regalo: NO');
+    lines.push(`Total: ${money(cartTotal())}`);
+    track('click_whatsapp', {
+      origen: origen,
+      regalo: !!giftBox,
+      currency: 'CLP',
+      value: cartTotal(),
+      num_packs: cartCount(),
+      items: ids.map(id=>({ item_id:id, item_name:cart[id].name, price:cart[id].price, quantity:cart[id].qty }))
+    });
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+  }
+
+  // Reemplazar botones de checkout para quitar listeners del script anterior
+  ['checkoutBtn','stickyCheckoutBtn'].forEach(id=>{
+    const old = document.getElementById(id);
+    const fresh = old.cloneNode(true);
+    old.parentNode.replaceChild(fresh, old);
+    fresh.addEventListener('click', ()=>doCheckout(id === 'checkoutBtn' ? 'carrito' : 'barra_inferior'));
+  });
 </script>
 
 </body>
