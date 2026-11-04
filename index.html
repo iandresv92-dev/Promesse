@@ -195,6 +195,26 @@
   .cart-gift img{ width:56px; height:56px; object-fit:cover; border-radius:10px; flex-shrink:0; }
   .cg-info{ flex:1; }
   .gift-toggle{ margin-top:6px; background:var(--ink); color:var(--paper); border:none; font-size:11.5px; font-weight:600; padding:6px 10px; border-radius:8px; cursor:pointer; }
+
+  /* ===== MODO NAVIDAD: para quitarlo, borra class="navidad" del <body> y el bloque .xmas-* ===== */
+  :root{ --xmas-red:#B23A3A; --xmas-green:#2F6B4F; --xmas-gold:#C9A24A; }
+  .xmas-strip{ background:var(--xmas-green); color:#fff; text-align:center; font-size:12px; font-weight:600; padding:8px 12px; letter-spacing:0.02em; position:relative; z-index:3; }
+  .xmas-garland{ height:8px; background:repeating-linear-gradient(90deg, var(--xmas-red) 0 14px, #fff 14px 22px, var(--xmas-green) 22px 36px); position:relative; z-index:3; }
+  body.navidad .hero .eyebrow{ color:var(--xmas-red); }
+  body.navidad .p-cta, body.navidad .chip.active, body.navidad .sticky-bar button.navidad-btn{ background:var(--xmas-green); }
+  body.navidad .chip.active{ border-color:var(--xmas-green); }
+  body.navidad .gb-tag{ background:var(--xmas-red); }
+  body.navidad .gift-banner{ border:2px solid var(--xmas-gold); }
+  body.navidad .gb-price{ color:var(--xmas-red); }
+  body.navidad .section-head h2::after{ content:" 🎄"; }
+  .snow{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:2; }
+  .snowflake{ position:absolute; top:-12px; color:#fff; opacity:.85; text-shadow:0 0 3px rgba(90,60,40,.35); animation-name:snowfall; animation-timing-function:linear; animation-iteration-count:infinite; }
+  @keyframes snowfall{
+    0%{ transform:translate3d(0,0,0); }
+    50%{ transform:translate3d(18px,50vh,0); }
+    100%{ transform:translate3d(-8px,110vh,0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .snow{ display:none; } }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY3YLQ8Q1R"></script>
@@ -206,8 +226,16 @@
   // Envío seguro: no rompe la página si un bloqueador impide cargar GA
   function track(name, params){ try { gtag('event', name, params || {}); } catch(e) {} }
 </script>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Promesse","url":"https://www.promesse.cl/","logo":"https://www.promesse.cl/images/favicon-512.png","sameAs":["https://www.instagram.com/promesse.cl"]}
+</script>
 </head>
-<body>
+<body class="navidad">
 
 <header>
   <div class="brand">
@@ -222,6 +250,9 @@
     <span class="cart-count" id="cartCount" style="display:none;">0</span>
   </button>
 </header>
+<div class="xmas-strip">🎄 Ideas para regalar esta Navidad · Envío para regalo disponible</div>
+<div class="xmas-garland"></div>
+
 
 <section class="hero">
   <img class="hero-sheep" src="images/sheep-icon.png" alt="">
@@ -1048,5 +1079,25 @@
   });
 </script>
 
+<div class="snow" id="snow" aria-hidden="true"></div>
+<script>
+  // Nieve decorativa (solo modo navidad). Quitar este bloque para desactivarla.
+  (function(){
+    if(!document.body.classList.contains('navidad')) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const layer = document.getElementById('snow');
+    const flakes = ['❄','❅','❆','•'];
+    for(let i=0;i<22;i++){
+      const s = document.createElement('span');
+      s.className = 'snowflake';
+      s.textContent = flakes[i % flakes.length];
+      s.style.left = (Math.random()*100) + '%';
+      s.style.fontSize = (8 + Math.random()*10) + 'px';
+      s.style.animationDuration = (12 + Math.random()*14) + 's';
+      s.style.animationDelay = (-Math.random()*20) + 's';
+      layer.appendChild(s);
+    }
+  })();
+</script>
 </body>
 </html>
