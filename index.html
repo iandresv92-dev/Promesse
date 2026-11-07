@@ -215,6 +215,14 @@
     100%{ transform:translate3d(-8px,110vh,0); }
   }
   @media (prefers-reduced-motion: reduce){ .snow{ display:none; } }
+
+  /* ===== Zoom de foto al tocarla ===== */
+  .swatch img{ cursor:zoom-in; }
+  .zoom-overlay{ position:fixed; inset:0; background:rgba(20,12,8,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; padding:56px 16px 24px; z-index:95; }
+  .zoom-overlay.open{ display:flex; }
+  .zoom-overlay img{ max-width:100%; max-height:78vh; object-fit:contain; border-radius:14px; background:#fff; }
+  .zoom-name{ color:#fff; font-family:'Fraunces',serif; font-size:16px; margin-top:14px; text-align:center; }
+  .zoom-close{ position:absolute; top:12px; right:14px; width:40px; height:40px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:20px; cursor:pointer; }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY3YLQ8Q1R"></script>
@@ -1097,6 +1105,37 @@
       s.style.animationDelay = (-Math.random()*20) + 's';
       layer.appendChild(s);
     }
+  })();
+</script>
+<div class="zoom-overlay" id="zoomOverlay" aria-hidden="true">
+  <button class="zoom-close" id="zoomClose" aria-label="Cerrar">✕</button>
+  <img id="zoomImg" alt="">
+  <div class="zoom-name" id="zoomName"></div>
+</div>
+<script>
+  // Al tocar la foto de un pack se abre ampliada. No afecta el botón Agregar.
+  (function(){
+    const overlay = document.getElementById('zoomOverlay');
+    const img = document.getElementById('zoomImg');
+    const nameEl = document.getElementById('zoomName');
+    function openZoom(src, alt){
+      img.src = src; img.alt = alt;
+      nameEl.textContent = alt;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+    function closeZoom(){
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    document.getElementById('grid').addEventListener('click', function(e){
+      const el = e.target.closest('.swatch img');
+      if(!el) return;
+      openZoom(el.getAttribute('src'), el.getAttribute('alt') || '');
+    });
+    document.getElementById('zoomClose').addEventListener('click', closeZoom);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeZoom(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeZoom(); });
   })();
 </script>
 </body>
