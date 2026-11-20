@@ -201,12 +201,11 @@
   .xmas-strip{ background:var(--xmas-green); color:#fff; text-align:center; font-size:12px; font-weight:600; padding:8px 12px; letter-spacing:0.02em; position:relative; z-index:3; }
   .xmas-garland{ height:8px; background:repeating-linear-gradient(90deg, var(--xmas-red) 0 14px, #fff 14px 22px, var(--xmas-green) 22px 36px); position:relative; z-index:3; }
   body.navidad .hero .eyebrow{ color:var(--xmas-red); }
-  body.navidad .p-cta, body.navidad .chip.active, body.navidad .sticky-bar button.navidad-btn{ background:var(--xmas-green); }
+  body.navidad .p-cta, body.navidad .chip.active{ background:var(--xmas-green); }
   body.navidad .chip.active{ border-color:var(--xmas-green); }
   body.navidad .gb-tag{ background:var(--xmas-red); }
   body.navidad .gift-banner{ border:2px solid var(--xmas-gold); }
   body.navidad .gb-price{ color:var(--xmas-red); }
-  body.navidad .section-head h2::after{ content:" 🎄"; }
   .snow{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:2; }
   .snowflake{ position:absolute; top:-12px; color:#fff; opacity:.85; text-shadow:0 0 3px rgba(90,60,40,.35); animation-name:snowfall; animation-timing-function:linear; animation-iteration-count:infinite; }
   @keyframes snowfall{
@@ -799,31 +798,113 @@
           <button class="p-cta" onclick="addToCart('n52','Pack Snoopy Girl',8990,this)">Agregar</button>
         </div>
       </div>
-      <div class="product-card" data-cat="familiar" data-name="Pack Bob Esponja" data-price="4990">
-        <div class="swatch"><img src="images/pack-n53.jpg" alt="Pack Bob Esponja" loading="lazy"></div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Bob Esponja" data-price="5990">
+        <div class="swatch"><img src="images/pack-bob-v2.jpg" alt="Pack Bob Esponja" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Bob Esponja</div>
           <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
-          <div class="p-price">$4.990</div>
-          <button class="p-cta" onclick="addToCart('n53','Pack Bob Esponja',4990,this)">Agregar</button>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n53','Pack Bob Esponja',5990,this)">Agregar</button>
         </div>
       </div>
-      <div class="product-card" data-cat="familiar" data-name="Pack Hey Arnold" data-price="4990">
+      <div class="product-card" data-cat="familiar" data-name="Pack Hey Arnold" data-price="5990">
         <div class="swatch"><img src="images/pack-n54.jpg" alt="Pack Hey Arnold" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Hey Arnold</div>
           <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
-          <div class="p-price">$4.990</div>
-          <button class="p-cta" onclick="addToCart('n54','Pack Hey Arnold',4990,this)">Agregar</button>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n54','Pack Hey Arnold',5990,this)">Agregar</button>
         </div>
       </div>
-      <div class="product-card" data-cat="familiar" data-name="Pack Rugrats" data-price="4990">
+      <div class="product-card" data-cat="familiar" data-name="Pack Rugrats" data-price="5990">
         <div class="swatch"><img src="images/pack-n55.jpg" alt="Pack Rugrats" loading="lazy"></div>
         <div class="p-info">
           <div class="p-name">Pack Rugrats</div>
           <div class="p-desc">2 pares, Mujer/Hombre, material: algodón. Talla: 36-39.</div>
-          <div class="p-price">$4.990</div>
-          <button class="p-cta" onclick="addToCart('n55','Pack Rugrats',4990,this)">Agregar</button>
+          <div class="p-price">$5.990</div>
+          <button class="p-cta" onclick="addToCart('n55','Pack Rugrats',5990,this)">Agregar</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="mujer" data-name="Pack Snoopy Colors" data-price="8990">
+        <div class="swatch"><img src="images/pack-n56.jpg" alt="Pack Snoopy Colors" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Snoopy Colors</div>
+          <div class="p-desc">4 pares, Mujer, material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$8.990</div>
+          <button class="p-cta" onclick="addToCart('n56','Pack Snoopy Colors',8990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Looney Tunes Pink" data-price="7590">
+        <div class="swatch"><img src="images/pack-n57.jpg" alt="Pack Looney Tunes Pink" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Looney Tunes Pink</div>
+          <div class="p-desc">2 pares, Mujer, diseño Looney Tunes. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n57','Pack Looney Tunes Pink',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Looney Tunes Black" data-price="7590">
+        <div class="swatch"><img src="images/pack-n58.jpg" alt="Pack Looney Tunes Black" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Looney Tunes Black</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño Looney Tunes. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n58','Pack Looney Tunes Black',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="mujer" data-name="Pack Chicas Superpoderosas" data-price="10990">
+        <div class="swatch"><img src="images/pack-n59.jpg" alt="Pack Chicas Superpoderosas" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Chicas Superpoderosas</div>
+          <div class="p-desc">3 pares, Mujer, diseño Chicas Superpoderosas. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$10.990</div>
+          <button class="p-cta" onclick="addToCart('n59','Pack Chicas Superpoderosas',10990,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Scooby-Doo" data-price="7590">
+        <div class="swatch"><img src="images/pack-n60.jpg" alt="Pack Scooby-Doo" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Scooby-Doo</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño Scooby-Doo. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n60','Pack Scooby-Doo',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Tom y Jerry" data-price="7590">
+        <div class="swatch"><img src="images/pack-n61.jpg" alt="Pack Tom y Jerry" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Tom y Jerry</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño Tom y Jerry. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n61','Pack Tom y Jerry',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Garfield Navidad" data-price="7590">
+        <div class="swatch"><img src="images/pack-n62.jpg" alt="Pack Garfield Navidad" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Garfield Navidad</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño Garfield Navidad. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n62','Pack Garfield Navidad',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Snoopy Navidad" data-price="7590">
+        <div class="swatch"><img src="images/pack-n63.jpg" alt="Pack Snoopy Navidad" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Snoopy Navidad</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño Snoopy Navidad. Material: algodón. Talla: 36-39.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n63','Pack Snoopy Navidad',7590,this)">Agregar</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="familiar" data-name="Pack Food Colors" data-price="7590">
+        <div class="swatch"><img src="images/pack-n64.jpg" alt="Pack Food Colors" loading="lazy"></div>
+        <div class="p-info">
+          <div class="p-name">Pack Food Colors</div>
+          <div class="p-desc">2 pares, Mujer/Hombre, diseño de comida. Material: algodón. Talla: 39-46.</div>
+          <div class="p-price">$7.590</div>
+          <button class="p-cta" onclick="addToCart('n64','Pack Food Colors',7590,this)">Agregar</button>
         </div>
       </div>
 </div>
@@ -1119,14 +1200,11 @@
     const img = document.getElementById('zoomImg');
     const nameEl = document.getElementById('zoomName');
     function openZoom(src, alt){
-      img.src = src; img.alt = alt;
-      nameEl.textContent = alt;
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
+      img.src = src; img.alt = alt; nameEl.textContent = alt;
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
     }
     function closeZoom(){
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true');
     }
     document.getElementById('grid').addEventListener('click', function(e){
       const el = e.target.closest('.swatch img');
